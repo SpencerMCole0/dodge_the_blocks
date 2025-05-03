@@ -48,7 +48,8 @@ pygame.init()
 high_score_file = "high_score.txt"
 if os.path.exists(high_score_file):
     with open(high_score_file, "r") as file:
-        high_score = int(file.read())
+        content = file.read().strip()
+        high_score = int(content) if content.isdigit() else 0
 else:
     high_score = 0
 

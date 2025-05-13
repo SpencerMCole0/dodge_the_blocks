@@ -14,25 +14,46 @@ def show_start_screen():
     subtitle_font = pygame.font.SysFont(None, 36)
     start_font = pygame.font.SysFont(None, 28)
 
+    difficulty = None
+
+    # Difficulty selection screen
     screen.fill(WHITE)
-
-    # Title
     title_text = title_font.render("Dodge the Blocks", True, BLACK)
-    screen.blit(title_text, (WIDTH // 2 - title_text.get_width() // 2, 80))
-
-    # Subtitle
     subtitle_text = subtitle_font.render("Avoid falling blocks. Survive as long as you can!", True, BLACK)
-    screen.blit(subtitle_text, (WIDTH // 2 - subtitle_text.get_width() // 2, 140))
+    diff_text = start_font.render("Select Difficulty: 1 = Easy, 2 = Normal, 3 = Hard", True, BLACK)
 
-    # Start button box
+    screen.blit(title_text, (WIDTH // 2 - title_text.get_width() // 2, 60))
+    screen.blit(subtitle_text, (WIDTH // 2 - subtitle_text.get_width() // 2, 120))
+    screen.blit(diff_text, (WIDTH // 2 - diff_text.get_width() // 2, 200))
+    pygame.display.flip()
+
+    while difficulty is None:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key in [pygame.K_1, pygame.K_KP1]:
+                    difficulty = "easy"
+                elif event.key in [pygame.K_2, pygame.K_KP2]:
+                    difficulty = "normal"
+                elif event.key in [pygame.K_3, pygame.K_KP3]:
+                    difficulty = "hard"
+
+    # Confirm with "Press SPACE to Start"
+    screen.fill(WHITE)
+    confirm_text = start_font.render(f"Difficulty selected: {difficulty.title()}", True, BLACK)
+    start_text = start_font.render("Press SPACE to Start", True, WHITE)
+
+    # Draw button background
     box_width, box_height = 300, 50
     box_x = WIDTH // 2 - box_width // 2
     box_y = 250
     pygame.draw.rect(screen, BLUE, (box_x, box_y, box_width, box_height), border_radius=10)
 
-    start_text = start_font.render("Press SPACE to Start", True, WHITE)
+    screen.blit(title_text, (WIDTH // 2 - title_text.get_width() // 2, 60))
+    screen.blit(confirm_text, (WIDTH // 2 - confirm_text.get_width() // 2, 140))
     screen.blit(start_text, (WIDTH // 2 - start_text.get_width() // 2, box_y + 10))
-
     pygame.display.flip()
 
     waiting = True
@@ -45,11 +66,13 @@ def show_start_screen():
                 if event.key == pygame.K_SPACE:
                     waiting = False
 
-def run_game(high_score):
+    return difficulty
+
+def run_game(high_score, difficulty):
     WIDTH, HEIGHT = 600, 400
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Dodge the Blocks")
-    game = Game(screen, high_score)
+    game = Game(screen, high_score, difficulty)
     return game.run()
 
 def show_game_over_screen(score, high_score):
@@ -97,8 +120,8 @@ else:
 
 while True:
     try:
-        show_start_screen()
-        final_score, high_score = run_game(high_score)
+        difficulty = show_start_screen()
+        final_score, high_score = run_game(high_score, difficulty)
 
         # Save high score
         with open(high_score_file, "w") as file:

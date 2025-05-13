@@ -5,7 +5,7 @@ from player import Player
 from block import Block
 
 class Game:
-    def __init__(self, screen, high_score):
+    def __init__(self, screen, high_score, difficulty):
         self.WIDTH, self.HEIGHT = screen.get_size()
         self.screen = screen
         self.high_score = high_score
@@ -18,6 +18,24 @@ class Game:
         self.RED = (255, 0, 0)
         self.BLUE = (50, 150, 255)
 
+        self.difficulty = difficulty
+
+        # Adjust base speed and number of blocks based on difficulty
+        if self.difficulty == "easy":
+            self.base_speed = 3
+            self.num_blocks = 2
+        elif self.difficulty == "normal":
+            self.base_speed = 5
+            self.num_blocks = 3
+        elif self.difficulty == "hard":
+            self.base_speed = 7
+            self.num_blocks = 4
+        else:
+            self.base_speed = 5
+            self.num_blocks = 3
+
+        self.block_size = 50
+
         self.player = Player(
             x=self.WIDTH // 2 - 25,
             y=self.HEIGHT - 60,
@@ -26,9 +44,6 @@ class Game:
             color=self.BLUE
         )
 
-        self.block_size = 50
-        self.base_speed = 5
-        self.num_blocks = 3
         self.blocks = []
         for _ in range(self.num_blocks):
             x = random.randint(0, self.WIDTH - self.block_size)

@@ -1,32 +1,56 @@
 # 🎮 Dodge the Blocks
 
-A fast-paced Python arcade game where you dodge falling blocks and try to survive as long as you can. Built using **Pygame** with clean, modular, object-oriented code.
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Built with Pygame](https://img.shields.io/badge/built%20with-pygame-orange)
+
+_A fast-paced arcade game built with Python and Pygame. Dodge the falling blocks, survive as long as you can, and beat your high score!_
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 🖼️ Gameplay Preview
+
+<!-- Replace with a real screenshot or GIF -->
+![Game Screenshot](media/dodge_the_blocks.gif)
 
 ---
 
 ## 🕹️ How to Play
 
-- Use **left/right arrow keys** to move your player block.
-- Avoid the red falling blocks.
-- The longer you survive, the faster they fall.
-- Lose all your lives and it’s game over.
+- Move left/right using the **arrow keys**
+- Avoid falling red blocks
+- Score increases the longer you survive
+- Lose all lives and it's **Game Over**
+- Select difficulty at the start (Easy, Normal, Hard)
 
 ---
 
-## 🧠 Features
+## ✨ Features
 
-- 💡 Difficulty Selector (Easy / Normal / Hard)
-- 🧱 Modular OOP Structure (`Player`, `Block`, `Game`)
-- 💾 High Score Saving
-- 🎨 Styled Start Screen with Key Prompts
-- 🛠 Error-safe file loading and clean Git history
+- 🧠 **Difficulty Selection** (1 = Easy, 2 = Normal, 3 = Hard)
+- 🎮 **Modular OOP Architecture**: `Player`, `Block`, `Game` classes
+- 💾 **High Score Saving** (stored between sessions)
+- 🖥️ **Styled Start Menu** with difficulty confirmation
+- 🔁 **Dynamic Difficulty**: block speed scales with score
+- 🛠️ **Crash-safe file reading** for high score
 
 ---
 
-## 🛠️ How to Run
+## 🛠️ Installation & Setup
 
-1. Make sure you have Python installed (v3.8+ recommended)
-2. Install `pygame` if you don’t have it:
+### Requirements:
+- Python 3.10 or later
+- Pygame
+
+### Run Locally:
 
 ```bash
+# Install pygame
 pip install pygame
+
+# Run the game
+python main.py

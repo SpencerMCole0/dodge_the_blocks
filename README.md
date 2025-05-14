@@ -14,8 +14,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 🖼️ Gameplay Preview
 
-<!-- Replace with a real screenshot or GIF -->
-![Game Screenshot](media/dodge_the_blocks.gif)
+![Gameplay Preview](media/dodge_the_blocks.gif)
 
 ---
 
